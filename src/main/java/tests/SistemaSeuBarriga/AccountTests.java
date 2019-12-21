@@ -3,8 +3,12 @@ package tests.SistemaSeuBarriga;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import core.BaseTest;
+import core.DriverFactory;
 import pages.MenuPage;
 import pages.SistemaSeuBarriga.AccountPage;
 import pages.SistemaSeuBarriga.LoginPage;
@@ -51,6 +55,8 @@ public class AccountTests extends BaseTest {
 
 	@Test
 	public void deleteAccountWithMovement() {
+		WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 5);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@text='Conta com movimentacao']")));
 		accountPage.selectAccount("Conta com movimentacao");
 		accountPage.clickDelete();
 		Assert.assertEquals("Conta em uso nas movimentações", accountPage.getMessageAccountWithMovement());
